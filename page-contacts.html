@@ -358,40 +358,40 @@
 </section>
 <!-- #contact1 end -->
 
-<!-- Google maps
+<!-- OpenStreetMap with Leaflet.js
 ============================================= -->
-<section class="google-maps pb-0 pt-0">
+<section class="osm-maps pb-0 pt-0">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12  col-sm-12  col-md-12 pr-0 pl-0">
-                <div id="googleMap" style="width:100%;height:350px;">
+            <div class="col-xs-12 col-sm-12 col-md-12 pr-0 pl-0">
+                <div id="osmMap" style="width:100%;height:350px;">
                 </div>
             </div>
         </div>
     </div>
-    <script src="assets/js/jquery-2.2.4.min.js"></script>
-    <script src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyCzsH5ekyIL5nAyykulD6nDqzyq7ogdg7k"></script>
-    <script src="assets/js/plugins/jquery.gmap.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <script>
-        $('#googleMap').gMap({
-            address: "1281 Aster Blvd, Edmonton AB T6T 1J1, Canada",
-            zoom: 15,
-            maptype: 'ROADMAP',
-            markers: [{
-                address: "Edmonton, AB",
-                maptype: 'ROADMAP',
-                icon: {
-                    image: "assets/images/gmap/maker.png",
-                    iconsize: [76, 61],
-                    iconanchor: [17, 35]
-                }
-            }]
-        });
+        $(document).ready(function() {
+            // Initialize the map and set its view to the given coordinates and zoom level
+            var map = L.map('osmMap').setView([53.5461, -113.4938], 15); // Edmonton coordinates
 
+            // Add the OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add a marker at the specified address
+            var marker = L.marker([53.5461, -113.4938]).addTo(map)
+                .bindPopup("<b>Edmonton, AB</b><br>1281 Aster Blvd, Edmonton AB T6T 1J1, Canada")
+                .openPopup();
+        });
     </script>
 </section>
+
 <!-- footer#1
 ============================================= -->
 <footer id="footer" class="footer footer-1 text-center">
